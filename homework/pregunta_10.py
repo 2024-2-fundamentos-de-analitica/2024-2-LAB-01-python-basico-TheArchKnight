@@ -7,16 +7,17 @@ utilizar pandas, numpy o scipy.
 
 
 def pregunta_10():
-    """
-    Retorne una lista de tuplas contengan por cada tupla, la letra de la
-    columna 1 y la cantidad de elementos de las columnas 4 y 5.
+    resultado = []
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            columnas = line.strip().split("\t")
+            letra = columnas[0]  # Columna 1
+            elementos_col4 = len(columnas[3].split(","))  # Elementos en la columna 4
+            elementos_col5 = len(columnas[4].split(","))  # Elementos en la columna 5
+            resultado.append((letra, elementos_col4, elementos_col5))  # Agregar a la lista
 
-    Rta/
-    [('E', 3, 5),
-     ('A', 3, 4),
-     ...
-     ('E', 2, 3),
-     ('E', 3, 3)]
+    return resultado
 
 
-    """
+# Ejecutar la función y mostrar el resultado
+print(pregunta_10())

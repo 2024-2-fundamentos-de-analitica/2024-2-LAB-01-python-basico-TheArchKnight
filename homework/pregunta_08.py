@@ -7,23 +7,18 @@ utilizar pandas, numpy o scipy.
 
 
 def pregunta_08():
-    """
-    Genere una lista de tuplas, donde el primer elemento de cada tupla
-    contiene  el valor de la segunda columna; la segunda parte de la tupla
-    es una lista con las letras (ordenadas y sin repetir letra) de la
-    primera  columna que aparecen asociadas a dicho valor de la segunda
-    columna.
+    asociaciones = {}
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            columns = line.strip().split("\t")
+            valor = int(columns[1])  # Segunda columna
+            letra = columns[0]  # Primera columna
+            if valor not in asociaciones:
+                asociaciones[valor] = set()  # Usamos un conjunto para evitar repeticiones
+            asociaciones[valor].add(letra)  # Agregamos la letra
+    resultado = sorted((valor, sorted(list(letras))) for valor, letras in asociaciones.items())
+    return resultado
 
-    Rta/
-    [(0, ['C']),
-     (1, ['B', 'E']),
-     (2, ['A', 'E']),
-     (3, ['A', 'B', 'D', 'E']),
-     (4, ['B', 'E']),
-     (5, ['B', 'C', 'D', 'E']),
-     (6, ['A', 'B', 'C', 'E']),
-     (7, ['A', 'C', 'D', 'E']),
-     (8, ['A', 'B', 'D', 'E']),
-     (9, ['A', 'B', 'C', 'E'])]
 
-    """
+# Ejecutar la función y mostrar el resultado
+print(pregunta_08())
